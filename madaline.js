@@ -33,10 +33,17 @@ class Madaline {
         for (var jumps = 0; jumps < 3; jumps++) {
             this.animations[jumps] = [];
             for (var state = 0; state < STATES.length; state++) {
-                this.animations[jumps][STATES[state]] = new Animator(this.spritesheet,
-                    // States are back to back horizontally, and aligned vertically with 1 jump being at y=0 and the rest being stacked vetrtically starting at like 64
-                    8 + SPRITE_WIDTH * state, (jumps === 1) ? 0 : 64 + SPRITE_WIDTH * jumps / 2, 
-                    SPRITE_WIDTH, SPRITE_WIDTH, 1, 1, false, false, true);
+                if (STATES[state] == "running") {
+                    this.animations[jumps][STATES[state]] = new Animator(this.spritesheet,
+                        // States are back to back horizontally, and aligned vertically with 1 jump being at y=0 and the rest being stacked vetrtically starting at like 64
+                        8 + SPRITE_WIDTH * (state - 1), (jumps === 1) ? 0 : 64 + SPRITE_WIDTH * jumps / 2, 
+                        SPRITE_WIDTH, SPRITE_WIDTH, 2, 0.05, false, false, true);
+                } else {
+                    this.animations[jumps][STATES[state]] = new Animator(this.spritesheet,
+                        // States are back to back horizontally, and aligned vertically with 1 jump being at y=0 and the rest being stacked vetrtically starting at like 64
+                        8 + SPRITE_WIDTH * state, (jumps === 1) ? 0 : 64 + SPRITE_WIDTH * jumps / 2, 
+                        SPRITE_WIDTH, SPRITE_WIDTH, 1, 1, false, false, true);
+                }
             }
         }
     }
