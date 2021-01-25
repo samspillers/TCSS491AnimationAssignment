@@ -38,27 +38,60 @@ class GameEngine {
             return { x: x, y: y };
         }
 
-        this.ctx.canvas.addEventListener("mousemove", function (e) {
-            //console.log(getXandY(e));
-            that.mouse = getXandY(e);
+        this.ctx.canvas.addEventListener("keydown", function (e) {
+            switch (e.code) {
+                case "ArrowLeft":
+                case "KeyA":
+                    that.left = true;
+                    break;
+                case "ArrowRight":
+                case "KeyD":
+                    that.right = true;
+                    break;
+                case "ArrowUp":
+                case "KeyW":
+                    that.up = true;
+                    break;
+                case "ArrowDown":
+                case "KeyS":
+                    that.down = true;
+                    break;
+                case "KeyZ":
+                case "Comma":
+                    that.dash = true;
+                    break;
+                case "Space":
+                    that.jump = true;
+                    break;
+            }
         }, false);
 
-        this.ctx.canvas.addEventListener("click", function (e) {
-            //console.log(getXandY(e));
-            that.click = getXandY(e);
-        }, false);
-
-        this.ctx.canvas.addEventListener("wheel", function (e) {
-            //console.log(getXandY(e));
-            that.wheel = e;
-            //       console.log(e.wheelDelta);
-            e.preventDefault();
-        }, false);
-
-        this.ctx.canvas.addEventListener("contextmenu", function (e) {
-            //console.log(getXandY(e));
-            that.rightclick = getXandY(e);
-            e.preventDefault();
+        this.ctx.canvas.addEventListener("keyup", function (e) {
+            switch (e.code) {
+                case "ArrowLeft":
+                case "KeyA":
+                    that.left = false;
+                    break;
+                case "ArrowRight":
+                case "KeyD":
+                    that.right = false;
+                    break;
+                case "ArrowUp":
+                case "KeyW":
+                    that.up = false;
+                    break;
+                case "ArrowDown":
+                case "KeyS":
+                    that.down = false;
+                    break;
+                case "KeyZ":
+                case "Comma":
+                    that.dash = false;
+                    break;
+                case "Space":
+                    that.jump = false;
+                    break;
+            }
         }, false);
     };
 
